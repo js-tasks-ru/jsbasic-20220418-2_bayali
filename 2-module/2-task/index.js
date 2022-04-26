@@ -3,7 +3,7 @@ function isEmpty(obj) {
   for (key in obj) {
     count++;
   }
-  if(count){
+  if (count) {
     return false;
   } return true;
 }
