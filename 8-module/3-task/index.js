@@ -6,26 +6,44 @@ export default class Cart {
   }
 
   addProduct(product) {
-    // ваш код
+    if (product) {
+      let cartItem = this.cartItems.some((item) => {
+        if (item.product == product) {
+          item.count++;
+          return true;
+        }
+      });
+
+      if (!cartItem) {
+        this.cartItems.push({ product: product, count: 1 });
+      }
+
+      this.onProductUpdate(this.cartItems);
+    }
   }
 
   updateProductCount(productId, amount) {
-    // ваш код
+    let cartItem = this.cartItems.find(cartItem => {
+      return cartItem.product.id == productId
+    });
+    cartItem.count += amount;
+    cartItem.count === 0 && this.cartItems.splice(this.cartItems.indexOf(cartItem), 1);
+    this.onProductUpdate(cartItem);
   }
 
   isEmpty() {
-    // ваш код
+    return this.cartItems.length ? false : true;
   }
 
   getTotalCount() {
-    // ваш код
+    return this.cartItems.reduce((sum, current) => sum + current.count, 0);
   }
 
   getTotalPrice() {
-    // ваш код
+    return this.cartItems.reduce((sum, current) => sum + current.product.price * current.count, 0);
   }
 
-  onProductUpdate(cartItem) {
+  onProductUpdate() {
     // реализуем в следующей задаче
 
     this.cartIcon.update(this);

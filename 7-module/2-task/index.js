@@ -34,11 +34,11 @@ export default class Modal {
   }
 
   setTitle(title) {
-    this.elem.querySelector('.modal__title').append(title);
+    this.elem.querySelector('.modal__title').textContent = title;
   }
 
   setBody = (body) => {
-    this.elem.querySelector('.modal__body').append(body);
+    this.elem.querySelector('.modal__body').innerHTML = body.outerHTML;
   }
 
   close = (event) => {
